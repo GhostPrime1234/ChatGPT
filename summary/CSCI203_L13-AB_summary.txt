@@ -1,0 +1,78 @@
+# The Great Divide in Algorithms
+
+## Classes of Algorithms
+### Overview of Algorithm Classes
+- **Polynomial Algorithms**: Algorithms that run in time proportional to a polynomial function of the input size.
+- **Exponential Algorithms**: Algorithms that run in time proportional to an exponential function of the input size.
+- **Factorial Algorithms**: Algorithms that run in time proportional to a factorial of the input size.
+
+### Types of Algorithm Growth Rates
+- **Constant Time (O(1))**: Execution time does not change with the size of the input.
+- **Logarithmic Time (O(log n))**: Execution time grows logarithmically as the input size increases.
+- **Linear Time (O(n))**: Execution time grows linearly with the input size.
+- **Polynomial Time (O(n^k))**: Execution time grows polynomially with the input size.
+- **Exponential Time (O(2^n))**: Execution time doubles with each additional input size.
+- **Factorial Time (O(n!))**: Execution time grows factorially with the input size.
+
+### Example Functions
+- **Exponential Growth**: \( O(2^n) \), \( O(3^n) \)
+- **Polynomial Growth**: \( O(n^2) \), \( O(n^3) \)
+- **Factorial Growth**: \( O(n!) \)
+
+## Complexity Classes: P, NP, and NP-Complete
+### Definitions
+- **P**: Set of problems that can be solved in polynomial time using a deterministic algorithm.
+- **NP**: Set of problems for which a solution can be verified in polynomial time using a deterministic algorithm.
+- **NP-Complete**: A problem is NP-complete if:
+  - It is in NP.
+  - Every problem in NP can be reduced to it in polynomial time.
+
+### NP-Completeness
+- **Polynomial Reducibility**: A decision problem \( D_1 \) is polynomially reducible to a decision problem \( D_2 \) if there exists a polynomial-time computable function \( t \) that transforms instances of \( D_1 \) to instances of \( D_2 \).
+- **Example of NP-Complete Problems**: Traveling Salesman Problem, Graph Isomorphism.
+
+## Longest Common Subsequence (LCS) Problem
+### Problem Definition
+- The LCS problem involves finding the longest subsequence common to two sequences.
+- Example: For sequences \( X = \text{ABCBDAB} \) and \( Y = \text{BDCAB} \), the LCS is \( \text{BCAB} \) or \( \text{BDAB} \).
+
+### Historical Context
+- In 1981, Smith and Waterman used dynamic programming to solve the LCS problem in \( O(n^2) \) time, but this led to further questions about the existence of polynomial-time solutions for all problems.
+
+## Optimization Problems
+### Relationship to Decision Problems
+- Many real-world problems are optimization problems rather than decision problems.
+- Optimization problems can often be transformed into decision problems to apply NP-completeness theory.
+
+## Problem vs. Algorithm
+### Distinction
+- A problem can have multiple algorithms with varying efficiencies.
+- Example: The sorting problem can be solved using:
+  - Mergesort with \( O(n \log n) \)
+  - Permutation sort with \( O(n!) \)
+
+### Efficiency Variability
+- The efficiency of algorithms can depend on the input. For instance, Quicksort has an average-case time complexity of \( O(n \log n) \) but can degrade to \( O(n^2) \) with certain inputs.
+
+## Final Examination Overview
+### Structure
+- The final exam consists of short answer questions, with a total of 8 questions worth 6-8 marks each.
+- All examination materials are restricted to those provided on the Moodle site.
+
+### Important Instructions
+- Students must write their full name and student number on each exam page and submit answers individually as PDF files.
+
+### Technical Considerations
+- Students should test their technology before the exam and be prepared to handle any technical issues on the exam day.
+
+## Recommended References
+- **Introduction to the Design and Analysis of Algorithms** by A. Levitin (3rd Ed., Pearson, 2011).
+- **Introduction to Algorithms** by T. H. Cormen (3rd Ed., MIT Press, 2009).
+
+## Important Topics Covered
+- **Weeks 1-3**: Basics of algorithm efficiency, data structures.
+- **Weeks 4-6**: Advanced data structures including trees and hashing.
+- **Weeks 7-11**: Dynamic programming and graph algorithms.
+- **Weeks 12-13**: In-depth exploration of P, NP, and NP-completeness. 
+
+This structured breakdown provides a comprehensive overview of the key topics covered in the lecture, facilitating easier study and review for the final examination.

@@ -1,0 +1,3 @@
+C:/Users/michael/OneDrive - University of Wollongong/UOW/Bachelor of Computer Science/ChatGPT/ChatGPT-C++/cmake-build-debug/CMakeFiles/ChatGPT_C__.dir
+C:/Users/michael/OneDrive - University of Wollongong/UOW/Bachelor of Computer Science/ChatGPT/ChatGPT-C++/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/michael/OneDrive - University of Wollongong/UOW/Bachelor of Computer Science/ChatGPT/ChatGPT-C++/cmake-build-debug/CMakeFiles/rebuild_cache.dir

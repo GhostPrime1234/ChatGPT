@@ -1,0 +1,157 @@
+# Representation
+
+## Weighted Graphs
+- **Definition**: A weighted graph \( G \) consists of an ordered sequence \( (V, E, W) \) where:
+  - \( V \) = vertices
+  - \( E \) = edges
+  - \( W \) = edge weights
+- **Example**:
+  - Vertices: \( V = \{a, b, c, d, e\} \)
+  - Edges: \( E = \{(a, b), (a, c), (a, e), (d, b), (d, c), (e, d)\} \)
+  - Weights: \( W((a, b)) = 50 \)
+
+## Adjacency Matrix Representation
+- **Extension**: Replace the zero-one existence values with edge weights.
+- **Structure**:
+  - A matrix where the entry \( M[i][j] \) represents the weight of the edge from vertex \( i \) to vertex \( j \) (or infinity if no edge exists).
+- **Example**:
+  ```
+  |   | a  | b  | c  | d  | e  |
+  |---|----|----|----|----|----|
+  | a | 0  | 50 | 30 | ∞  | 20 |
+  | b | ∞  | 0  | 10 | ∞  | ∞  |
+  | c | ∞  | ∞  | 0  | 15 | ∞  |
+  | d | ∞  | 5  | ∞  | 0  | 10 |
+  | e | ∞  | ∞  | ∞  | ∞  | 0  |
+  ```
+
+## Adjacency List Representation
+- **Structure**: Each vertex points to a list of its adjacent vertices along with the corresponding edge weights.
+- **Example**:
+  ```
+  a -> (b, 50), (c, 30), (e, 20)
+  b -> (c, 10)
+  c -> (d, 15)
+  d -> (b, 5), (e, 10)
+  e -> (d, 10)
+  ```
+
+---
+
+# Dijkstra's Algorithm
+
+## Overview
+- **Purpose**: To find the shortest path from a source vertex \( s \) to all other reachable vertices in a weighted graph with non-negative weights.
+- **Process**:
+  1. Initialize a set \( S \) (selected vertices) and a set \( C \) (candidate vertices).
+  2. Select the vertex with the minimum distance from \( C \) and move it to \( S \).
+  3. Update the distances for all adjacent vertices in \( C \).
+
+## Steps
+1. **Initialization**:
+   - Set \( D[v] = 0 \) for the source vertex \( s \), and \( D[v] = \infty \) for all other vertices.
+   - Set \( S = \{s\} \) and \( C = V \setminus S \).
+
+2. **Iterative Process**:
+   - While \( C \) is not empty:
+     - Select vertex \( v \) from \( C \) with the minimum \( D[v] \).
+     - Move \( v \) to \( S \).
+     - For each vertex \( u \) adjacent to \( v \):
+       - If \( D[u] > D[v] + W(v, u) \):
+         - Update \( D[u] = D[v] + W(v, u) \).
+
+## Example
+- **Initial State**:
+  ```
+  S = {a}
+  C = {b, c, d, e}
+  D = {0, ∞, ∞, ∞, ∞}
+  ```
+- **After Step 1 (Select e)**:
+  ```
+  S = {a, e}
+  C = {b, c, d}
+  D = {0, 10, 100, 20}
+  ```
+
+## Pseudocode
+```python
+def Dijkstra(G, s):
+    D = [∞ for _ in range(n)]  # Distance array
+    D[s] = 0  # Distance to source is zero
+    P = [None for _ in range(n)]  # Parent array
+    C = set(range(n))  # Candidate set
+
+    while C:
+        v = min(C, key=lambda u: D[u])  # Get vertex with min distance
+        C.remove(v)  # Move v to S
+        for u in neighbors(v):
+            if u in C and D[u] > D[v] + W(v, u):
+                D[u] = D[v] + W(v, u)
+                P[u] = v  # Update parent
+    return D, P
+```
+
+---
+
+# Bellman-Ford Algorithm
+
+## Overview
+- **Purpose**: To find the shortest paths from a source vertex \( s \) in graphs that may contain negative weights.
+- **Key Feature**: It can detect negative weight cycles.
+
+## Steps
+1. **Initialization**:
+   - Set \( D[v] = \infty \) for all vertices, except \( D[s] = 0 \).
+
+2. **Relaxation**:
+   - For \( |V| - 1 \) iterations, relax all edges.
+   - For each edge \( (u, v) \):
+     - If \( D[v] > D[u] + W(u, v) \):
+       - Update \( D[v] = D[u] + W(u, v) \).
+
+3. **Check for Negative Cycles**:
+   - Perform one more iteration to check if any distance can still be reduced.
+
+## Example
+- **Initialization**:
+  ```
+  D = {0, ∞, ∞, ∞, ∞}
+  ```
+- **After Relaxation**:
+  ```
+  D = {0, 10, 20, 30, 40}
+  ```
+
+## Pseudocode
+```python
+def BellmanFord(G, s):
+    D = [∞ for _ in range(n)]  # Distance array
+    D[s] = 0  # Distance to source is zero
+
+    for _ in range(n - 1):
+        for (u, v) in edges(G):
+            if D[v] > D[u] + W(u, v):
+                D[v] = D[u] + W(u, v)
+
+    # Check for negative weight cycles
+    for (u, v) in edges(G):
+        if D[v] > D[u] + W(u, v):
+            return "Negative cycle detected"
+    return D
+```
+
+---
+
+# Comparison of Algorithms
+
+| Feature             | Dijkstra's Algorithm               | Bellman-Ford Algorithm          |
+|---------------------|------------------------------------|---------------------------------|
+| Handles Negative Weights | No                            | Yes                             |
+| Time Complexity      | \( O(V \log V + E) \)             | \( O(V \times E) \)            |
+| Best for             | Non-negative weights               | Graphs with negative weights    |
+| Cycle Detection      | No                                 | Yes                             |
+
+---
+
+This concludes the notes on representation, Dijkstra's Algorithm, and Bellman-Ford Algorithm, along with their comparisons and examples.

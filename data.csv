@@ -1,0 +1,10 @@
+What is the time complexity of the fastest known algorithm for the Longest Common Subsequence (LCS) problem in the 1960s?,θ(2^n)
+What is the time complexity of the algorithm developed by Smith and Waterman for the LCS problem in 1981?,θ(n^2)
+What is the main distinction between P and NP problems?,"P can be solved deterministically in polynomial time, NP cannot"
+What is the definition of NP-completeness?,A decision problem that is in NP and every problem in NP is polynomially reducible to it
+What algorithmic approach did Smith and Waterman use to solve the LCS problem?,Dynamic programming
+Which problem is described as determining whether two graphs can be drawn identically?,Graph isomorphism
+"In the context of algorithm efficiency, what does θ(n log n) represent?",Polynomial time complexity for sorting algorithms like mergesort
+What type of problems can be transformed into decision problems to apply NP-completeness theory?,Optimization problems
+What are the characteristics of a nondeterministic algorithm?,Exhibits different behaviors on different runs for the same input
+What is the relationship between the travelling salesman problem and NP-completeness?,It is a well-known NP-complete problem that seeks a route of the same length through all nodes in a network

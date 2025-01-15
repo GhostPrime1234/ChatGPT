@@ -1,0 +1,137 @@
+# CSCI203: Algorithms and Data Structures - Graphs
+
+## 1. Introduction to Graphs
+### 1.1 Definition
+- A graph \( G \) is defined as a pair \( (V, E) \), where:
+  - \( V \) is a set of vertices (or nodes).
+  - \( E \) is a set of edges (or arcs) that connect pairs of vertices.
+
+### 1.2 Types of Graphs
+- **Undirected Graph**: Edges have no direction; the relationship is bidirectional.
+- **Directed Graph**: Edges have a direction; the relationship is one-way.
+
+## 2. Graph Representation
+### 2.1 Adjacency List
+- **Structure**: An array (or hash table) of lists, where each list corresponds to a vertex and contains all vertices adjacent to it.
+- **Space Complexity**: \( O(V + E) \)
+- **Example**:
+  ```plaintext
+  V = {V1, V2, V3, V4}
+  E = {(V1, V2), (V1, V3), (V2, V4), (V3, V4)}
+  ```
+  - Adjacency List Representation:
+    - V1: [V2, V3]
+    - V2: [V4]
+    - V3: [V4]
+    - V4: []
+
+### 2.2 Adjacency Matrix
+- **Structure**: A \( |V| \times |V| \) matrix where the entry at row \( i \) and column \( j \) indicates whether there is an edge from vertex \( i \) to vertex \( j \).
+- **Space Complexity**: \( O(V^2) \) for dense graphs.
+- **Example**:
+  ```plaintext
+  Adjacency Matrix:
+       V1  V2  V3  V4
+    V1  0   1   1   0
+    V2  0   0   0   1
+    V3  0   0   0   1
+    V4  0   0   0   0
+  ```
+
+## 3. Graph Traversal Algorithms
+### 3.1 Breadth-First Search (BFS)
+- **Purpose**: To explore all vertices reachable from a starting vertex \( s \).
+- **Time Complexity**: \( O(V + E) \)
+- **Algorithm**:
+  ```python
+  def BFS(s, Adj):
+      visited = set()
+      queue = []
+      parent = {}
+      
+      queue.append(s)
+      visited.add(s)
+      parent[s] = None
+      
+      while queue:
+          current = queue.pop(0)
+          for neighbor in Adj[current]:
+              if neighbor not in visited:
+                  queue.append(neighbor)
+                  visited.add(neighbor)
+                  parent[neighbor] = current
+                  
+      return visited, parent
+  ```
+
+### 3.2 Depth-First Search (DFS)
+- **Purpose**: To explore all vertices reachable from a starting vertex \( s \) using a stack.
+- **Time Complexity**: \( O(V + E) \)
+- **Algorithm**:
+  ```python
+  def DFS(s, Adj):
+      visited = set()
+      stack = []
+      parent = {}
+      
+      stack.append(s)
+      visited.add(s)
+      parent[s] = None
+      
+      while stack:
+          current = stack.pop()
+          for neighbor in Adj[current]:
+              if neighbor not in visited:
+                  stack.append(neighbor)
+                  visited.add(neighbor)
+                  parent[neighbor] = current
+                  
+      return visited, parent
+  ```
+
+## 4. BFS vs DFS
+### 4.1 Key Differences
+- **Order of Exploration**: BFS explores neighbors level by level, while DFS goes as deep as possible along a branch before backtracking.
+- **Use Cases**:
+  - BFS is often used for finding the shortest path in unweighted graphs.
+  - DFS is useful for topological sorting and cycle detection.
+
+## 5. Applications of Graphs
+### 5.1 Real-Life Applications
+- **Web Crawling**: Exploring web pages through hyperlinks.
+- **Network Broadcasting**: Efficiently sending information across a network.
+- **Social Networking**: Finding connections and relationships between users.
+- **Garbage Collection**: Managing memory allocation in programming languages.
+- **Puzzles and Games**: Solving mazes or game states.
+
+## 6. Cycle Detection
+### 6.1 Definition
+- A cycle is a path that starts and ends at the same vertex.
+- **Detection Method**: Using DFS, if a backward edge is found, a cycle exists.
+
+## 7. Topological Sort
+### 7.1 Definition
+- A linear ordering of vertices such that for every directed edge \( (u, v) \), vertex \( u \) comes before \( v \).
+- **Use Case**: Job scheduling where tasks must be completed in a certain order.
+- **Algorithm**:
+  ```python
+  def topological_sort(G):
+      visited = set()
+      stack = []
+      
+      def dfs(v):
+          visited.add(v)
+          for neighbor in G[v]:
+              if neighbor not in visited:
+                  dfs(neighbor)
+          stack.append(v)
+      
+      for vertex in G:
+          if vertex not in visited:
+              dfs(vertex)
+      
+      return stack[::-1]  # Return in reverse order
+  ```
+
+## 8. Conclusion
+Graphs are a fundamental data structure in computer science with various applications. Understanding how to represent and traverse graphs is crucial for solving complex problems efficiently.

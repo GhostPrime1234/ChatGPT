@@ -1,0 +1,102 @@
+# Lecture Notes on Articulation Points in Graphs
+
+## Overview
+- **Course:** CSCI203 - Algorithms and Data Structures
+- **Lecturer:** Dr. Xueqiao Liu
+- **Date:** 6/09/2024
+- **Email:** xueqiao@uow.edu.au
+
+---
+
+## 1. Introduction to Articulation Points
+### 1.1 Definition
+- An **articulation point** (or cut vertex) in an undirected connected graph is a vertex whose removal increases the number of connected components in the graph. 
+
+### 1.2 Importance
+- Articulation points highlight vulnerabilities in network designs. Identifying these points is crucial for ensuring network reliability.
+
+### 1.3 Characteristics
+- In a disconnected graph, an articulation point is a vertex that, when removed, increases the number of connected components.
+
+---
+
+## 2. Finding Articulation Points
+### 2.1 Depth First Search (DFS) Approach
+- A systematic method to find articulation points involves performing a depth-first traversal of the graph. This generates a DFS tree and computes two key values for each vertex:
+  - **discover[v]:** The discovery time of vertex v during DFS.
+  - **Low[v]:** The lowest discovery time reachable from subtree rooted at v.
+
+### 2.2 Low Value Calculation
+- The formula for `Low(v)` is given by:
+  \[
+  Low(v) = \min\{discover(v), discover(w) : (u,w) \text{ is a back edge for some descendant } u \text{ of } v\}
+  \]
+
+### 2.3 Conditions for Articulation Points
+- The root of the DFS tree is an articulation point if it has two or more children.
+- Any internal vertex v is an articulation point if:
+  - It has a child w such that \( Low[w] \geq discover[v] \).
+
+---
+
+## 3. Edge Classification in DFS
+### 3.1 Types of Edges
+- In an undirected graph, edges can be classified as:
+  - **Tree edges:** Form part of the DFS tree.
+  - **Back edges:** Connect a vertex to one of its ancestors in the DFS tree.
+
+### 3.2 Edge Properties
+- A subtree can only reach back to its ancestors through back edges.
+- An edge connecting unrelated vertices is known as a cross edge.
+
+---
+
+## 4. Algorithm for Finding Articulation Points
+### 4.1 Pseudocode
+```python
+ArticulationPoints(G):
+    for each v in V:
+        articulation_point[v] = false
+        if p[v] == NULL:  # v is a root
+            if |Adj(v)| > 1:
+                articulation_point[v] = true
+        else:
+            for each w in Adj(v) and w is not a leaf in T:
+                if Low[w] >= discover[v]:
+                    articulation_point[v] = true
+```
+
+### 4.2 Steps in the Algorithm
+1. Perform a DFS to compute `discover[v]` and `Low[v]` for each vertex.
+2. Check the conditions for each vertex to determine if it is an articulation point.
+
+---
+
+## 5. Observations and Examples
+### 5.1 Discovery and Low Values
+- The discovery times increase as the DFS progresses from ancestors to descendants.
+- If a subtree rooted at a child does not have a back edge connecting to a vertex with a smaller discovery time than `discover[v]`, then v is an articulation point.
+
+### 5.2 Example Walkthrough
+- Given a graph, convert it to a DFS tree and compute the discovery and low values for each vertex.
+- Check pairs of vertices to identify articulation points based on the conditions outlined.
+
+### 5.3 Naive Approach vs Efficient Approach
+- **Naive Approach:** Remove each vertex and check if the graph remains connected using BFS/DFS. Time complexity is \( O(V \times (V + E)) \).
+- **Efficient Approach:** Use the DFS-based algorithm to find articulation points in \( O(V + E) \) time.
+
+---
+
+## 6. Applications and Conclusion
+### 6.1 Importance in Network Design
+- Identifying articulation points is crucial for understanding critical components in networks.
+- Components corresponding to articulation points are vital; their failure can compromise network connectivity.
+
+### 6.2 Summary
+- Articulation points are essential for analyzing the robustness of networks.
+- The DFS-based algorithm provides an efficient method for identifying these points, aiding in the design of more reliable systems.
+
+--- 
+
+### Note
+These notes are structured to provide a comprehensive understanding of articulation points in graphs, including their identification through DFS, the significance of low and discovery values, and the algorithmic approach for efficient computation.

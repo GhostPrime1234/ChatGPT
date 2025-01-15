@@ -1,0 +1,89 @@
+# Lecture Notes on Multi-dimensional Search Trees
+
+## 1. Introduction to Multi-dimensional Search Trees
+- Multi-dimensional search trees are data structures designed to efficiently manage and query multi-dimensional data.
+- Common types include Range Trees and KD-Trees.
+
+## 2. Range Trees
+### 2.1 Definition
+- A Range Tree is a binary search tree (BST) where each node stores a point in multi-dimensional space and allows efficient range queries.
+
+### 2.2 Structure
+- Each node in a Range Tree contains:
+  - A splitting value (not necessarily the same as the data).
+  - Pointers to left and right subtrees.
+  - Data points are stored in the leaf nodes.
+
+### 2.3 Range Queries
+- **1D Range Queries**: Retrieve data points within a specified interval \([x, x']\).
+  - **Example**: Retrieve all points in the range \([25, 90]\).
+  - **Process**: Perform binary search twice to find the leaves that correspond to \(x\) and \(x'\).
+  
+- **2D Range Queries**: Extend the concept to two dimensions, typically represented as a rectangle.
+  - **Example**: Retrieve all points in the rectangle defined by \([x, x'] \times [y, y']\).
+  
+### 2.4 Complexity
+- **Query time**: \(O(k + \log^d n)\) for \(d\) dimensions, where \(k\) is the number of reported points.
+
+## 3. KD-Trees
+### 3.1 Definition
+- KD-Trees are a type of binary search tree that partitions space into hyperrectangles, suitable for multi-dimensional data.
+
+### 3.2 Structure
+- Each node represents a hyperplane that divides the space into two parts.
+- Points to the left (or right) of the hyperplane represent the left (or right) subtree.
+
+### 3.3 Construction
+- **Insertion**: Points are inserted based on a splitting axis that alternates at each level of the tree.
+  - **Split by Median**: Ideally, split the points at the median value of the current dimension.
+  
+### 3.4 Nearest Neighbor Queries
+- **1-NN Query**: Find the single closest point to a given point.
+- **k-NN Query**: Find the \(k\) closest points to a given point.
+
+### 3.5 Complexity
+- **Construction time**: \(O(dn \log n)\), where \(d\) is the number of dimensions.
+- **Space complexity**: \(O(n)\).
+- **Query time**: \(O(n^{1-1/d} + k)\) for k nearest neighbors.
+
+### 3.6 Example of KD-Tree
+- **Splitting Strategy**: 
+  - First level splits by x-coordinate.
+  - Second level splits by y-coordinate.
+  
+### 3.7 Deletion in KD-Trees
+- **Finding Replacement**: 
+  - If the node has a right child, find the minimum in the right subtree.
+  - If no right child, find the maximum in the left subtree.
+
+## 4. Queries
+### 4.1 Exact Match Query
+- Retrieve objects whose key matches the query key exactly.
+  - **Example**: Retrieve the record with ID = 12345.
+
+### 4.2 Nearest Neighbor Query
+- Asks for objects whose key is "close" to the query key.
+  - **Example**: Find the employee whose salary is closest to $50,000.
+
+### 4.3 Range Query
+- Asks for objects whose key lies within a specified range.
+  - **Example**: Retrieve records satisfying \(20 < \text{Age} < 50\).
+
+## 5. Examples
+### 5.1 Example of 3D Range Query
+- Query for children in \{2, 4\}, salary in (3000, 4000], and date of birth in [19,500,000; 19,559,999].
+
+### 5.2 1D Range Search Example
+- Retrieve all points in the interval \([25, 90]\):
+  - Search path traverses nodes based on binary search properties.
+
+### 5.3 2D Range Search Example
+- Retrieve points within a rectangle defined by \([x,x']\) and \([y,y']\).
+
+## 6. Conclusion
+- Multi-dimensional search trees like Range Trees and KD-Trees provide efficient mechanisms for querying multi-dimensional datasets.
+- Understanding their structure and query mechanisms is crucial for applications in databases, image retrieval, and more.
+
+---
+
+These notes provide a comprehensive overview of the discussed topics in the lecture, including detailed descriptions of data structures, query types, and examples.

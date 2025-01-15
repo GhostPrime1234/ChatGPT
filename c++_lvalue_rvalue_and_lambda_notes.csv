@@ -1,0 +1,3 @@
+What are iterators?,"Iterators provide a standard/unified way to access elements in containers, regardless of the underlying data structure."
+What are the six building blocks of STL?,"Containers, iterators, algorithms, functors, adapters, allocators."
+What are random access and sequential access?,"Random Access: Allows direct access to any element in a data structure, enabling fast retrieval (e.g., arrays, hash tables). Sequential Access: Requires accessing elements in a linear order, one by one, which can be slower (e.g., linked lists, sequential file reading)."

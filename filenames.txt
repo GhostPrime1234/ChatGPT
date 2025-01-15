@@ -1,0 +1,11 @@
+11. Miscellaneous Materials 1 - Loose Ends - Const, Consteqxp, Type Deduction.md
+12. Programming With Class 1 - Fundamental Syntax And Concepts.md
+13. Programming with Class 2 - OOP In C++.md
+14. Programming with Class 3 - Inheritance And Polymorphism.md
+15. Miscellaneous Material 2 - Creating A Library In C++.md
+16. Miscellaneous Material 3 - Exceptions, Enums, Manipulators.md
+17. Miscellaneous Material 4 - Moving And Advanced Functions.md
+18. Generic Programming 1 - C++ Generic Programming.md
+19. Generic Programming 4- Containers And Iterators.md
+20. Generic Programming 5 - The Standard Template Library (Stl).md
+21. Miscellaneous Material 5 - Class Boilerplate, Templates, Lambda Expression.md
