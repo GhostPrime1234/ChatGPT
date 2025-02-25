@@ -1,14 +1,14 @@
 import logging
-from os import getenv, cpu_count, path
+from os import getenv, cpu_count
 from pathlib import Path
 from time import sleep
-from typing import List
 
 from openai import OpenAI, OpenAIError
 from pdf2image import convert_from_path
 from PIL import Image
 import pytesseract
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
 
 class LoggerSetup:
     @staticmethod
@@ -45,7 +45,21 @@ class OCRProcessor:
     def process_pdf(self, pdf_file: Path) -> str:
         """Processes OCR and generates text from a PDF file."""
         try:
-            images = convert_from_path(pdf_file)
+            # Ask the user for an optional page range
+            page_range = input(
+                "Enter page range to process (e.g., 2-5) or press Enter to process the entire PDF: "
+            ).strip()
+            convert_kwargs = {}
+
+            if page_range:
+                try:
+                    start_str, end_str = page_range.split("-")
+                    convert_kwargs['first_page'] = int(start_str)
+                    convert_kwargs['last_page'] = int(end_str)
+                except Exception as error:
+                    LoggerSetup.log_error(f"Invalid range entered ({error}). Processing entire PDF.")
+
+            images = convert_from_path(pdf_file, **convert_kwargs)
             text = ""
 
             with ThreadPoolExecutor(max_workers=self.max_concurrent_tasks) as executor:
@@ -71,19 +85,19 @@ class TextProcessor:
     @staticmethod
     def generate_notes(client: OpenAI, facts: str) -> str:
         """Generates notes by interacting with a chat-based language model."""
-        # user_headings = (
-        #     input("Please enter the headings that you want the notes to be created under separated by a comma: ").split(
-        #         ","))
+        user_headings = (
+            input("Please enter the headings that you want the notes to be created under separated by a comma: ").split(
+                ","))
         user_headings = ""
         headings_list = [heading.strip() for heading in user_headings]
 
         # Modified prompt for detailed notes with subheadings
         gpt_input = (
             "You are a note-taking assistant. Create detailed notes under the following main headings: "
-            f"{headings_list}. For each heading, generate subheadings where appropriate to ensure all key topics are "
-            "covered in a structured manner. Provide thorough explanations, examples, code snippets, formulas, and diagrams "
-            "as needed. Organize the content logically, ensuring that each subheading is relevant and elaborates on the "
-            "topics mentioned in the lecture. Present the notes in markdown format."
+            f"{headings_list}. For each heading, generate subheadings where appropriate to ensure all key topics "
+            "are covered in a structured manner. Provide thorough explanations, examples, code snippets, formulas, "
+            "and diagrams as needed. Organize the content logically, ensuring that each subheading is relevant and "
+            "elaborates on the topics mentioned in the lecture. Present the notes in markdown format."
         )
 
         try:

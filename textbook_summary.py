@@ -7,7 +7,10 @@ reader = PdfReader("pdf/{0}.pdf".format(user_input))
 
 text = ""
 
-for page in reader.pages:
-    text += page.extract_text() + "\n"
+start_page = int(input("Enter start page number: "))
+end_page = int(input("Enter end page number: "))
+
+for index in range(start_page - 1, end_page):
+    text += reader.pages[index].extract_text() + "\n"
 
 copy(text)
