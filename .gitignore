@@ -1,5 +1,8 @@
-/database
+# Ignoring specific files
 /filenames.txt
+
+# Ignoring directories
+/database
 /pdf/
 /Notes
 /ChatGPT-C++
@@ -8,6 +11,11 @@
 /Scripts
 /Lib
 /pdf_merge
+
+# Ignoring all .csv, .txt, and .md files
 /*.csv
 /*.txt
 /*.md
+
+# Exclude requiremenets.txt from being ignored
+!requirements.txt

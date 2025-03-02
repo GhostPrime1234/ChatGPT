@@ -1,0 +1,15 @@
+fitz
+pymupdf
+natsort
+ollama
+openai
+pandas
+pdf2image
+pypdf
+pyperclip
+pytesseract
+tiktoken
+
+pathlib
+pillow
+wmi
