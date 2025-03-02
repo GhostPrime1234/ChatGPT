@@ -128,7 +128,6 @@ class PDFProcessor:
 
     def __init__(self) -> None:
         """Initializes the PDFProcessor."""
-        self.pdf_name = ""
         LoggerSetup.setup_logging(self.SUMMARY_FILE_PATH)
 
     def list_pdf_files(self) -> List[Path]:
@@ -170,7 +169,7 @@ class PDFProcessor:
         except KeyboardInterrupt:
             LoggerSetup.log_info("\nExiting program due to user interruption.")
         except FileNotFoundError as error:
-            LoggerSetup.log_error(f"PDF file '{self.pdf_name}' not found: {error}")
+            LoggerSetup.log_error(f"PDF file '{selected_pdf}' not found: {error}")
         except Exception as error:
             LoggerSetup.log_error(f"An unexpected error occurred: {error}")
 
