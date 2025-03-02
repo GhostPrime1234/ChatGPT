@@ -1,3 +1,10 @@
-database/
-filenames.txt
-/pdf*
+/database
+/filenames.txt
+/pdf
+/summary
+Scripts/*
+/Lib/*
+/pdf_merge
+/*.csv
+/*.txt
+/*.md
